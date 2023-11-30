@@ -34,3 +34,5 @@ public class GetMethodEx03 extends HttpServlet{
 		
 	}
 }
+
+// add comment
