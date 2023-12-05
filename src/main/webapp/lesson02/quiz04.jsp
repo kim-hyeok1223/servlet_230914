@@ -11,11 +11,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </head>
 <body>
-	<form method = "post" action = "/lesson02/quiz04">
+	<form method = "post" action = "/lesson02/quiz04_1.jsp">
 		<div class="container mt-2">
 			<h1> 길이 변환 </h1>
 			<div class = "d-flex">
-			<input type="text" name = "lenght">
+			<input type="text" name = "length">
 			<div>cm</div>
 			</div>
 			<label for="inch">인치</label>
