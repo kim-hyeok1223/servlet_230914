@@ -57,7 +57,7 @@ public class MysqlService {
 	}
 	// CUD
 	public void update(String query) throws SQLException {
-		statement.executeQuery(query);
+		statement.executeUpdate(query);
 	}
 	
 	// R
