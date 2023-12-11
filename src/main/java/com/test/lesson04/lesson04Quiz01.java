@@ -13,42 +13,36 @@ import javax.servlet.http.HttpServletResponse;
 import com.test.common.MysqlService;
 
 @WebServlet("/lesson04/quiz01")
-public class lesson04Quiz01 extends HttpServlet{
-
-	@Override
+public class lesson04Quiz01 extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain");
 		
-		MysqlService ms = MysqlService.getInstance();
-		ms.connect();
-		
-		String insertQuery = "insert into `real_estate`"
-				+ "(`realtorId`,`address`,`area`,`type`,`price`,`rentPrice`)"
-				+ "values"
-				+ "(3, '헤라펠리스 101동 5305호', 350, '매매', 1500000,	NULL)";
-		
+		MysqlService mysqlService = MysqlService.getInstance(); 
+		mysqlService.connect(); // DB 연결
+
+		// -- 쿼리 수행
 		try {
-			ms.update(insertQuery);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		PrintWriter out = response.getWriter();
-		String query = "select * from `real_estate` order by `realtorId` desc limit 10";
-		try {
-			ResultSet res = ms.select(query);
-			while(res.next()) {
-				out.print("매물주소 : " + res.getString("address"));
-				out.print("면적" + res.getInt("area"));
-				out.print("타입" + res.getString("type"));
+			String insertQuery = "insert into `real_estate` (`realtorId`, `address`, `area`, `type`, `price`, `rentPrice`) "
+					+ "values (3, '헤라펠리스 101동 5305호', 350, '매매', 1500000, NULL)";
+			mysqlService.update(insertQuery);
+			
+			// 출력
+			PrintWriter out = response.getWriter();
+			
+			String selectQuery = "select `address`, `area`, `type` from `real_estate` order by `id` DESC limit 10";
+			ResultSet result = mysqlService.select(selectQuery);
+			
+			while (result.next()) {
+				String address = result.getString("address");
+				Integer area = result.getInt("area");
+				String type = result.getString("type");
+				out.println("매물 주소: " + address + ", 면적: " + area + ", 타입: " + type);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		ms.disconnect();
+
+		mysqlService.disconnect(); // DB 해제
 	}
 }
