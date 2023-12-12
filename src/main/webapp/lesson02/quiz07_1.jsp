@@ -14,6 +14,8 @@
 <body>
 	<%
 	String menu = request.getParameter("menu");
+	String except = request.getParameter("except");
+	boolean exclude = except != null;
 	
 	List<Map<String, Object>> list = new ArrayList<>();
     Map<String, Object> map = new HashMap<String, Object>() {{ put("name", "버거킹"); put("menu", "햄버거"); put("point", 4.3); } };
@@ -45,8 +47,8 @@
 					<%
 						for(int i = 0; i < list.size(); i++) {
 							if (list.get(i).get("menu").equals(menu)) { // 메뉴와 맵의 메뉴가 동일할 경우
-								for(int j =0; j < map.get("menu").count();j++) // 
-								out.print(list.get(i));
+								for(int j =0; j < list.get(i).get("menu").equals(menu).size();j++) // 
+									out.print(list.get(i).get("menu").);
 							}
 						}
 							
